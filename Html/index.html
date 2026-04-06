@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/mosque-svgrepo-com.svg" type="image/png">
+    <title>Prayers Time</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="sideMenu" class="fixed bg-[#5881aa] w-full h-full m-0 justify-center flex m-auto hidden  " >
+        <div class="flex flex-col items-center  justify-center ">
+            <div class="absolute top-5 right-10">
+                <i id="close" class="fa-solid fa-x fa-xl" style="color: rgb(255, 255, 255);"></i>
+            </div>
+            <input id="userCity" class=" bg-white rounded-xl pl-3 py-3 w-[320px] mt-5 mb-2" type="text" placeholder="Enter your City here.">
+             <div >
+                <input id="day" class=" bg-white rounded-xl pl-3 py-3 w-[100px] mb-2 " type="number" placeholder="Day">
+                <input id="month" class=" bg-white rounded-xl pl-3 py-3 w-[100px] mb-2 " type="number" placeholder="Month">
+                <input id="year" class=" bg-white rounded-xl pl-3 py-3 w-[100px] mb-2 " type="number" placeholder="Year">
+                <p id="error" class=" font-bold text-[12px] mt-2 mb-4 flex justify-center "></p>
+             </div>
+             <i id="Search" class="fa-solid fa-magnifying-glass fa-xl bg-white py-6  p-[30px] rounded-xl" style="color:#5881aa;"></i>
+        </div>
+    </div>
+    <nav class="mx-5 p-5">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center ">
+                <i id="menu" class="fa-solid fa-bars fa-xl pt-1 " style="color: #2f4784;"></i>
+                <div class="block px-3 items-center">
+                    <h2 id="dayName" class="text-[16px] md:text-[24px] text-[#2f4784] font-bold"></h2>
+                    <h2 id="date" class="text-[10px] md:text-[13px] text-[#2f4784] font-bold"></h2>
+                </div>
+            </div>
+            <div>
+                <h2 id="city" class="text-[16px] md:text-[20px] text-[#2f4784] font-bold" >Location</h2>
+            </div>
+        </div>
+    </nav>
+    <section class="mx-5 border border-[#8AC6BB] rounded-3xl bg-[#FBEACE] mt-2">
+        <div class="flex items-center mx-auto pl-2">
+            <div class="w-[60%] p-2">
+                <h4 class="text-[10px] md:text-[20px] lg:text-[35px] w-[100%] text-[#2f4784] font-bold">وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ وَارْكَعُوا مَعَ الرَّاكِعِينَ</h4>
+                <h2 id="dateHijri" class="text-[10px] md:text-[15px] lg:text-[25px] text-[#2f4784] font-bold"></h2>
+                
+            </div>
+            <div class="w-[40%]">
+                <img class="w-[100%]" src="../img/hand-drawn-flat-design-salat-illustration.png" alt="">
+            </div>
+        </div>
+    </section>
+    <section class="m-5 mt-8 md:mt-10 ">
+        <div>
+            <div id="prayerContainer1" class="flex bg-[#8AC6BB] justify-around py-3 md:py-5 border rounded-xl my-4">
+                <h1  class="text-white font-bold  md:text-[25px] text-[20px]">Fajr</h1>
+                <p id="fajrTime" class="text-white  text-[20px] md:text-[25px] "></p>
+            </div>
+            <div id="prayerContainer1" class="flex bg-[#8AC6BB] justify-around py-3 md:py-5 border rounded-xl my-4">
+                <h1  class="text-white font-bold  md:text-[25px] text-[20px]">Sunrise</h1>
+                <p id="sunTime" class="text-white  text-[20px] md:text-[25px] "></p>
+            </div>
+            <div id="prayerContainer1" class="flex bg-[#8AC6BB] justify-around py-3 md:py-5 border rounded-xl my-4">
+                <h1  class="text-white font-bold  md:text-[25px] text-[20px]">Dhuhr</h1>
+                <p id="dhuhrTime" class="text-white  text-[20px] md:text-[25px] "></p>
+            </div>
+            <div id="prayerContainer1" class="flex bg-[#8AC6BB] justify-around py-3 md:py-5 border rounded-xl my-4">
+                <h1  class="text-white font-bold  md:text-[25px] text-[20px]">Asr</h1>
+                <p id="asrTime" class="text-white  text-[20px] md:text-[25px] "></p>
+            </div>
+            <div id="prayerContainer1" class="flex bg-[#8AC6BB] justify-around py-3 md:py-5 border rounded-xl my-4">
+                <h1  class="text-white font-bold  md:text-[25px] text-[20px]">Maghrib</h1>
+                <p id="maghribTime" class="text-white  text-[20px] md:text-[25px] "></p>
+            </div>
+            <div id="prayerContainer1" class="flex bg-[#8AC6BB] justify-around py-3 md:py-5 border rounded-xl mt-4">
+                <h1  class="text-white font-bold  md:text-[25px] text-[20px]">Isha</h1>
+                <p id="ishaTime" class="text-white  text-[20px] md:text-[25px] "></p>
+            </div>
+
+        </div>
+    </section>
+    <footer class="mb-3">
+        <p class="text-[10px] text-[#A0816C] flex justify-center md:text-[18px] " >وَاتَّقُوا يَوْمًا تُرْجَعُونَ فِيهِ إِلَى اللَّهِ ۖ ثُمَّ تُوَفَّىٰ كُلُّ نَفْسٍ مَّا كَسَبَتْ وَهُمْ لَا يُظْلَمُونَ</p>
+    </footer>
+    <script src="../JS/index.js"></script>
+</body>
+</html>
