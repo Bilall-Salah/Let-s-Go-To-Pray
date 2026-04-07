@@ -11,11 +11,13 @@ let asrTime = document.getElementById("asrTime");
 let maghribTime = document.getElementById("maghribTime");
 let ishaTime = document.getElementById("ishaTime");
 let userDate;
+let userCity;
 let currentDate = document.getElementById("currentDate");
 let today = new Date();
 if (!userDate) {
     currentDate.innerText = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
     userDate = currentDate.innerText;
+    userCity = "Cairo";
     axios.get(`https://api.aladhan.com/v1/timingsByAddress/${userDate}?address=${userCity}&method=8`)
             .then((response) => {
                 const data = response.data.data;
@@ -50,7 +52,7 @@ search.addEventListener("click", () => {
     let day = document.getElementById("day").value.padStart(2, '0');
     let month = document.getElementById("month").value.padStart(2, '0');
     let year = document.getElementById("year").value;
-    let userCity = document.getElementById("userCity").value.trim();
+    userCity = document.getElementById("userCity").value.trim();
     let error = document.getElementById("error");
     userDate = `${day}-${month}-${year}`;
     if (!userCity || !day || !month || !year) {
