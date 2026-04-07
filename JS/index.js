@@ -10,6 +10,34 @@ let dhuhrTime = document.getElementById("dhuhrTime");
 let asrTime = document.getElementById("asrTime");
 let maghribTime = document.getElementById("maghribTime");
 let ishaTime = document.getElementById("ishaTime");
+let userDate;
+let currentDate = document.getElementById("currentDate");
+let today = new Date();
+if (!userDate) {
+    currentDate.innerText = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+    userDate = currentDate.innerText;
+    axios.get(`https://api.aladhan.com/v1/timingsByAddress/${userDate}?address=${userCity}&method=8`)
+            .then((response) => {
+                const data = response.data.data;
+                city.innerText = data.meta.timezone;
+                date.innerText = data.date.readable;
+                dayName.innerText = data.date.hijri.weekday.en;
+                dateHijri.innerText = data.date.hijri.month.en + " " + data.date.hijri.month.days;
+                fajrTime.innerText = data.timings.Fajr;
+                sunTime.innerText = data.timings.Sunrise;
+                dhuhrTime.innerText = data.timings.Dhuhr;
+                asrTime.innerText = data.timings.Asr;
+                maghribTime.innerText = data.timings.Maghrib;
+                ishaTime.innerText = data.timings.Isha;
+                userCity.value = "";
+                day.value = "";
+                month.value = "";
+                year.value = "";
+            })
+            .catch(err => {
+                console.log(err);
+            });
+}
 menu.addEventListener("click", () => {
     let sideMenu = document.getElementById("sideMenu");
     sideMenu.classList.remove("hidden");
@@ -24,7 +52,7 @@ search.addEventListener("click", () => {
     let year = document.getElementById("year").value;
     let userCity = document.getElementById("userCity").value.trim();
     let error = document.getElementById("error");
-    let userDate = `${day}-${month}-${year}`;
+    userDate = `${day}-${month}-${year}`;
     if (!userCity || !day || !month || !year) {
         error.innerText = "please complete the data!";
         error.classList.add("text-red-500");
